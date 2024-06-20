@@ -22,7 +22,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Colors.red[200], // buat ganti warna background
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

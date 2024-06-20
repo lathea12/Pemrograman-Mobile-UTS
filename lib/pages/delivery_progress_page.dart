@@ -8,8 +8,8 @@ class DeliveryProgressPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Pesanan anda sedang di siapkan"),
-          backgroundColor: Colors.transparent,
+          title: Text("Pesanan Anda"),
+          backgroundColor: Colors.red[300],
         ),
         bottomNavigationBar: _buildBottomNavBar(context),
         body: const Column(
@@ -62,7 +62,7 @@ class DeliveryProgressPage extends StatelessWidget {
                 "Koki",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 18,
+                  fontSize: 16,
                   color: Theme.of(context).colorScheme.primary,
                 ),
               ),

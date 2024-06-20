@@ -1,6 +1,9 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'package:projekutslagi/auth/login_or_register.dart';
 import 'package:projekutslagi/models/restaurant.dart';
+import 'package:projekutslagi/splashScren.dart';
 import 'package:projekutslagi/themes/theme_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -27,7 +30,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const LoginOrRegister(),
+      home: const SplashScreen(),
       theme: Provider.of<ThemeProvider>(context).themeData,
     );
   }

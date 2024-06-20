@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 class MyCartTile extends StatelessWidget {
   final CartItem cartItem;
-  
+
   const MyCartTile({super.key, required this.cartItem});
 
   @override

@@ -36,19 +36,19 @@ class MyCurrentLocation extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             "Lokasi anda",
-            style: TextStyle(color: Theme.of(context).colorScheme.primary),
+            style: TextStyle(color: Colors.white),
           ),
           GestureDetector(
             onTap: () => openLocationSearchBox(context),
-            child: Row(
+            child: const Row(
               children: [
                 //addres
                 Text(
                   "Ruang TI22-A1",
                   style: TextStyle(
-                    color: Theme.of(context).colorScheme.inversePrimary,
+                    color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

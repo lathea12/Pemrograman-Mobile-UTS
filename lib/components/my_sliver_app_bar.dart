@@ -33,8 +33,8 @@ class MySliverAppBar extends StatelessWidget {
           icon: const Icon(Icons.shopping_cart),
         ),
       ],
-      backgroundColor: Theme.of(context).colorScheme.background,
-      foregroundColor: Theme.of(context).colorScheme.inversePrimary,
+      backgroundColor: Colors.cyan[400],
+      foregroundColor: Colors.white,
       title: const Text("Kantin Grand Country"),
       flexibleSpace: FlexibleSpaceBar(
         background: Padding(

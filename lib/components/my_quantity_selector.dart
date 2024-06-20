@@ -18,7 +18,7 @@ class QuantitySelector extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.background,
+        color: Colors.amber,
         borderRadius: BorderRadius.circular(50),
       ),
       padding: const EdgeInsets.all(8),

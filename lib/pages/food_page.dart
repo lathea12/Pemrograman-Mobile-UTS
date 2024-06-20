@@ -44,6 +44,7 @@ class _FoodPageState extends State<FoodPage> {
       children: [
         //scaffold UI
         Scaffold(
+          backgroundColor: Colors.white,
           body: SingleChildScrollView(
             child: Column(
               children: [

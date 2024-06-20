@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_credit_card/flutter_credit_card.dart';
-import 'package:projekutslagi/components/my_button.dart';
+// ignore_for_file: unused_field
 
+import 'package:flutter/material.dart';
+import 'package:projekutslagi/components/my_button.dart';
 import 'delivery_progress_page.dart';
 
 class PaymentPage extends StatefulWidget {
@@ -13,104 +12,192 @@ class PaymentPage extends StatefulWidget {
 }
 
 class _PaymentPageState extends State<PaymentPage> {
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  String cardNumber = '';
-  String expiryDate = '';
-  String cardHolderName = '';
-  String cvvCode = '';
-  bool isCvvFocused = false;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  String _name = '';
+  String _phoneNumber = '';
+  String _pinCode = '';
 
-  //user ingin konfirmasi bayar
-  void userTappedPay() {
-    if (formKey.currentState!.validate()) {
-      //hanya tampilkan dialog jika form nya valid
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text("Konfirmasi Pembayaran"),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: [
-                Text("Nomer Kartu:$cardNumber"),
-                Text("Tanggal Kadaluarsa:$expiryDate"),
-                Text("Nama Pemilik:$cardHolderName"),
-                Text("CVV:$cvvCode"),
-              ],
-            ),
-          ),
-          actions: [
-            //button batalkan
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text("Batalkan"),
-            ),
+  void _userTappedPay() {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      _showDialog();
+    }
+  }
 
-            //lanjutkan
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DeliveryProgressPage(),
-                  ),
-                );
-              },
-              child: const Text("Lanjutkan"),
-            )
+  void _showDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Center(
+          child: Text("Konfirmasi Pembayaran",
+              style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue)),
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text("Nama: $_name",
+                style: TextStyle(fontSize: 16, color: Colors.grey[700])),
+            Text("Nomor HP: $_phoneNumber",
+                style: TextStyle(fontSize: 16, color: Colors.grey[700])),
           ],
         ),
-      );
-    }
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(
+                      Colors.redAccent.withOpacity(0.1)),
+                ),
+                child: const Text("Batalkan",
+                    style: TextStyle(fontSize: 16, color: Colors.redAccent)),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DeliveryProgressPage(),
+                    ),
+                  );
+                },
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all(Colors.green.withOpacity(0.1)),
+                ),
+                child: const Text("Lanjutkan",
+                    style: TextStyle(fontSize: 16, color: Colors.green)),
+              ),
+            ],
+          ),
+        ],
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        elevation: 10,
+        backgroundColor: Colors.white,
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        foregroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("Bayar"),
-      ),
-      body: Column(
-        children: [
-          //kartu kredit
-          CreditCardWidget(
-            cardNumber: cardNumber,
-            expiryDate: expiryDate,
-            cardHolderName: cardHolderName,
-            cvvCode: cvvCode,
-            showBackView: isCvvFocused,
-            onCreditCardWidgetChange: (p0) {},
-          ),
+      backgroundColor: Colors.red[300],
+      body: Container(
+        child: Column(
+          children: [
+            // logo e-wallet
+            Container(
+              margin: const EdgeInsets.only(top: 20, bottom: 20),
+              child:
+                  Image.asset('lib/images/logo.png', width: 100, height: 100),
+            ),
 
-          // form kartu kredit
-          CreditCardForm(
-            cardNumber: cardNumber,
-            expiryDate: expiryDate,
-            cardHolderName: cardHolderName,
-            cvvCode: cvvCode,
-            onCreditCardModelChange: (data) {
-              setState(() {
-                cardNumber = data.cardNumber;
-                expiryDate = data.expiryDate;
-                cardHolderName = data.cardHolderName;
-                cvvCode = data.cvvCode;
-              });
-            },
-            formKey: formKey,
-          ),
+            // form e-wallet
+            Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'Nama',
+                      labelStyle: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white, // change label text color
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(
+                            color:
+                                Colors.white), // change border color to white
+                      ),
+                      errorStyle: const TextStyle(
+                          color:
+                              Colors.white), // change error text color to white
+                    ),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter your name';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) => _name = value!,
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'Nomor HP',
+                      labelStyle: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white, // change label text color
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(
+                            color:
+                                Colors.white), // change border color to white
+                      ),
+                      errorStyle: const TextStyle(
+                          color:
+                              Colors.white), // change error text color to white
+                    ),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter your phone number';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) => _phoneNumber = value!,
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'PIN Code',
+                      labelStyle: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white, // change label text color
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(
+                            color:
+                                Colors.white), // change border color to white
+                      ),
+                      errorStyle: const TextStyle(
+                          color:
+                              Colors.white), // change error text color to white
+                    ),
+                    obscureText: true,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter your PIN code';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) => _pinCode = value!,
+                  ),
+                ],
+              ),
+            ),
 
-          const Spacer(),
+            const Spacer(),
 
-          MyButton(
-            onTap: userTappedPay,
-            text: "Bayar",
-          ),
+            MyButton(
+              onTap: _userTappedPay,
+              text: "BAYAR",
+            ),
 
-          const SizedBox(height: 25),
-        ],
+            const SizedBox(height: 25),
+          ],
+        ),
       ),
     );
   }

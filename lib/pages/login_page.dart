@@ -31,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Colors.red[200], // buat ganti warna background
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -45,11 +45,11 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(height: 25),
 
             //pesan
-            Text(
+            const Text(
               "Kantin Universitas Grand Country",
               style: TextStyle(
                 fontSize: 16,
-                color: Theme.of(context).colorScheme.inversePrimary,
+                color: Colors.white,
               ),
             ),
 
@@ -74,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
 
             //sign in button
             MyButton(
-              text: "Login",
+              text: "LOGIN",
               onTap: login,
             ),
 

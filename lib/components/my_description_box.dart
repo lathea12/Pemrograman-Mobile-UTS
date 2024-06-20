@@ -13,7 +13,7 @@ class MyDescriptionBox extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(color: Theme.of(context).colorScheme.secondary),
+        border: Border.all(color: Colors.white),
         borderRadius: BorderRadius.circular(8),
       ),
       padding: const EdgeInsets.all(25),
@@ -26,11 +26,11 @@ class MyDescriptionBox extends StatelessWidget {
             children: [
               Text(
                 'Pesan Sekarang',
-                style: myPrimaryTextStyle,
+                style: myPrimaryTextStyle.copyWith(color: Colors.white),
               ),
               Text(
                 'Sebelum Kehabisan',
-                style: mySecondaryTextStyle,
+                style: mySecondaryTextStyle.copyWith(color: Colors.white),
               ),
             ],
           ),
@@ -40,11 +40,11 @@ class MyDescriptionBox extends StatelessWidget {
             children: [
               Text(
                 '15-30 Menit',
-                style: myPrimaryTextStyle,
+                style: myPrimaryTextStyle.copyWith(color: Colors.white),
               ),
               Text(
                 'Perkiraan Tiba',
-                style: mySecondaryTextStyle,
+                style: mySecondaryTextStyle.copyWith(color: Colors.white),
               ),
             ],
           ),

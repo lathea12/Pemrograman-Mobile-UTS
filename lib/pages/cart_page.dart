@@ -20,7 +20,7 @@ class CartPage extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: const Text("Keranjang"),
-            backgroundColor: Colors.transparent,
+            backgroundColor: Colors.red[300],
             foregroundColor: Theme.of(context).colorScheme.inversePrimary,
             actions: [
               // button kosongkan keranjang

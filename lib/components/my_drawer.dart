@@ -9,7 +9,7 @@ class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Colors.cyan[400],
       child: Column(
         children: [
           //logo aplikasi
@@ -22,10 +22,10 @@ class MyDrawer extends StatelessWidget {
             ),
           ),
 
-          Padding(
-            padding: const EdgeInsets.all(25.0),
+          const Padding(
+            padding: EdgeInsets.all(25.0),
             child: Divider(
-              color: Theme.of(context).colorScheme.secondary,
+              color: Colors.white,
             ),
           ),
 
